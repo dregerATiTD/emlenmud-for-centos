@@ -1018,7 +1018,7 @@ void alignswitch(CHAR_DATA * ch, int newalign)
     }
 
   /* Wipe skills */
-  if( LEVEL(ch) != pow.level_to_choose || ch->pcdata->remort_times > 0)
+  if( LEVEL(ch) != poww.level_to_choose || ch->pcdata->remort_times > 0)
     for (i = 0; i < SKILL_COUNT; i++)
       ch->pcdata->learned[i] = -100;
   

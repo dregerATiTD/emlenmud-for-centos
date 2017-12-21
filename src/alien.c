@@ -36,7 +36,7 @@ if (!str_cmp(arg1, "list"))
     return;
   }
 
-if (pow.augmentremortonly == TRUE)
+if (poww.augmentremortonly == TRUE)
   {
     send_to_char ("Stand alone augmentation has been disabled, in order to augment\n\r",ch);
     send_to_char ("you will have to augment at remort, for help on doing this type help transform\n\r", ch);
@@ -154,41 +154,41 @@ if (num > 11)
     return;
   }
 can_augment = TRUE;
-if (ch->pcdata->remort_times < pow.augment_cost[num][0])
+if (ch->pcdata->remort_times < poww.augment_cost[num][0])
   {
-    sprintf(buf, "You need %d remorts to get this augment and you only have %d.\n\r", pow.augment_cost[num][0], ch->pcdata->remort_times);
+    sprintf(buf, "You need %d remorts to get this augment and you only have %d.\n\r", poww.augment_cost[num][0], ch->pcdata->remort_times);
     send_to_char(buf, ch);
     can_augment = FALSE;
   }
-if (LEVEL(ch) < pow.augment_cost[num][1])
+if (LEVEL(ch) < poww.augment_cost[num][1])
   {
-    sprintf(buf, "You need to be level %d to get this augment and you are only level %d.\n\r", pow.augment_cost[num][1], LEVEL(ch));
+    sprintf(buf, "You need to be level %d to get this augment and you are only level %d.\n\r", poww.augment_cost[num][1], LEVEL(ch));
     send_to_char(buf, ch);
     can_augment = FALSE;
   }
-if (tally_coins(ch) < (pow.augment_cost[num][2] * 100))
+if (tally_coins(ch) < (poww.augment_cost[num][2] * 100))
   {
-    sprintf(buf, "You need %d gold for this augment and you only have %d gold.\n\r", pow.augment_cost[num][2], (tally_coins(ch)/100));
+    sprintf(buf, "You need %d gold for this augment and you only have %d gold.\n\r", poww.augment_cost[num][2], (tally_coins(ch)/100));
     send_to_char(buf, ch);
     can_augment = FALSE;
   }
-if (ch->pcdata->warpoints < pow.augment_cost[num][3])
+if (ch->pcdata->warpoints < poww.augment_cost[num][3])
   {
-    sprintf(buf, "You need %d warpoints to get this augment and you only have %ld.\n\r", pow.augment_cost[num][3], ch->pcdata->warpoints);
+    sprintf(buf, "You need %d warpoints to get this augment and you only have %ld.\n\r", poww.augment_cost[num][3], ch->pcdata->warpoints);
     send_to_char(buf, ch);
     can_augment = FALSE;
   }
-if (ch->pcdata->killpoints < pow.augment_cost[num][4])
+if (ch->pcdata->killpoints < poww.augment_cost[num][4])
   {
-    sprintf(buf, "You need %d killpoints to get this augment and you only have %d.\n\r", pow.augment_cost[num][4], ch->pcdata->killpoints);
+    sprintf(buf, "You need %d killpoints to get this augment and you only have %d.\n\r", poww.augment_cost[num][4], ch->pcdata->killpoints);
     send_to_char(buf, ch);
     can_augment = FALSE;
   }
 if (!can_augment)
   return;
-ch->pcdata->warpoints -= pow.augment_cost[num][3];
-sub_coins ((pow.augment_cost[num][2]*100), ch);
-ch->pcdata->killpoints -= pow.augment_cost[num][4];
+ch->pcdata->warpoints -= poww.augment_cost[num][3];
+sub_coins ((poww.augment_cost[num][2]*100), ch);
+ch->pcdata->killpoints -= poww.augment_cost[num][4];
 ch->pcdata->augments ^= augment_flagss[num_wanted].flagname;
 sprintf(buf, "Congratulations %s, you now have the %s augment!\n\r", NAME(ch), augment_flagss[num_wanted].how_it_appears);
 send_to_char(buf, ch);
@@ -309,7 +309,7 @@ for (augment = 0; augment < 12; ++augment)
       else
 	sprintf(buf, "   ");
       send_to_char(buf, ch);
-      sprintf(buf, "Augment:%2d, Remorts:%2d, Level: %2d, Gold:%5d, Wps:%5d, Kps:%5d\n\r", (augment+1), pow.augment_cost[augment][0], pow.augment_cost[augment][1], pow.augment_cost[augment][2], pow.augment_cost[augment][3], pow.augment_cost[augment][4]);
+      sprintf(buf, "Augment:%2d, Remorts:%2d, Level: %2d, Gold:%5d, Wps:%5d, Kps:%5d\n\r", (augment+1), poww.augment_cost[augment][0], poww.augment_cost[augment][1], poww.augment_cost[augment][2], poww.augment_cost[augment][3], poww.augment_cost[augment][4]);
       send_to_char(buf, ch);
       if ((augment == augment_num))
 	{
@@ -481,49 +481,49 @@ do_alien (CHAR_DATA * ch, char *argy)
   char buf4[SML_LENGTH];
   char workstr[STD_LENGTH];
   int tmp_stat[NUM_STATS];
-  DEFINE_COMMAND ("transform", do_alien, POSITION_STANDING, pow.remort_level, LOG_ALWAYS, "This command is used to transform your character.  See help transform.")
+  DEFINE_COMMAND ("transform", do_alien, POSITION_STANDING, poww.remort_level, LOG_ALWAYS, "This command is used to transform your character.  See help transform.")
 
     if (IS_MOB (ch))
     return;
-  if (LEVEL (ch) < pow.remort_level)
+  if (LEVEL (ch) < poww.remort_level)
     {
     send_to_char("You do not meet the remort level requirement.\n\r", ch);
     return;
     }
-  if (pow.max_remorts == 0)
+  if (poww.max_remorts == 0)
     {
       send_to_char ("Huh?\n\r", ch);
       return;
     }
 
-  if (pow.max_remorts == 1 && ch->pcdata->remort_times > 0)
+  if (poww.max_remorts == 1 && ch->pcdata->remort_times > 0)
     {
       send_to_char ("You have already transformed; you cannot do it again!\n\r", ch);
       return;
     }
 
-  if (ch->pcdata->remort_times >= pow.max_remorts)
+  if (ch->pcdata->remort_times >= poww.max_remorts)
     {
       send_to_char ("You have reached the max transformations possible.\n\r", ch);
       return;
     }
 
-  if ((pow.transform_in_room > 1 && 
-      (!ch->in_room || ch->in_room->vnum != pow.transform_in_room) &&
+  if ((poww.transform_in_room > 1 && 
+      (!ch->in_room || ch->in_room->vnum != poww.transform_in_room) &&
       ch->pcdata->race < 11) ||
-      (pow.asctransform_in_room > 1 &&
-      (!ch->in_room || ch->in_room->vnum != pow.asctransform_in_room) &&
+      (poww.asctransform_in_room > 1 &&
+      (!ch->in_room || ch->in_room->vnum != poww.asctransform_in_room) &&
       ch->pcdata->race > 10))
     {
       send_to_char ("You aren't in the proper place in the world to do that!!\n\r", ch);
       return;
     }
-  if (pow.add_to_stats && (argy == "" || argy[0] == '\0'))
+  if (poww.add_to_stats && (argy == "" || argy[0] == '\0'))
     {
       show_remort (ch);
       return;
     }
-  if (pow.add_to_stats)
+  if (poww.add_to_stats)
     {
       argy = one_argy (argy, buf1);
       argy = one_argy (argy, buf2);
@@ -585,7 +585,7 @@ do_alien (CHAR_DATA * ch, char *argy)
 	//If Augments are Only Allowed at Remort check for them here
         argy = one_argy (argy, buf3);
 	augmented = -1;
-	if (pow.augmentremortonly)
+	if (poww.augmentremortonly)
 	{
         	for (m = 0; str_cmp(augment_flagss[m].what_you_type,"end_of_list"); m++)
 		{
@@ -692,7 +692,7 @@ do_alien (CHAR_DATA * ch, char *argy)
       next_obj = obj->next_content;
       if (IS_SET (obj->pIndexData->extra_flags, ITEM_SAVE))
 	continue;
-      if (pow.vaporize_inv && (obj->wear_loc == -1 || obj->contains != NULL))
+      if (poww.vaporize_inv && (obj->wear_loc == -1 || obj->contains != NULL))
 	{
 	  sprintf (workstr, "%s just vaporized!!\n\r", capitalize (obj->pIndexData->short_descr));
 	  send_to_char (workstr, ch);
@@ -701,7 +701,7 @@ do_alien (CHAR_DATA * ch, char *argy)
 	}
       else if (obj->wear_loc != -1)
 	unequip_char (ch, obj);
-      if (pow.vaporize_all)
+      if (poww.vaporize_all)
 	{
 	  sprintf (workstr, "%s just vaporized!!\n\r", capitalize (obj->pIndexData->short_descr));
 	  send_to_char (workstr, ch);
@@ -736,21 +736,21 @@ do_alien (CHAR_DATA * ch, char *argy)
       ch->pcdata->learned[k] = -100;
     }
   natural_mana (ch);
-  if (pow.beams_to_room > 0)
+  if (poww.beams_to_room > 0)
     {
       int to_room;
-      if (pow.beams_to_room == 1)
+      if (poww.beams_to_room == 1)
 	{
 	  to_room = (ALIGN(ch) + 100);
 	}
       else
-	to_room = pow.beams_to_room;
+	to_room = poww.beams_to_room;
       char_from_room (ch);
       char_to_room (ch, get_room_index (to_room));
       do_look (ch, "auto");
     }
   send_to_char ("\x1B[1;37mTransformation complete!!!\x1B[37;0m\n\r", ch);
-  if (pow.max_remorts > 1)
+  if (poww.max_remorts > 1)
     {
       sprintf (workstr, "This is remort number \x1B[1;37m%d\x1B[37;0m for your character!\n\r", ch->pcdata->remort_times);
       send_to_char (workstr, ch);

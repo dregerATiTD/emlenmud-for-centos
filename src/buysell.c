@@ -365,11 +365,11 @@ do_repair (CHAR_DATA * ch, char *argy)
 	      I_WEAPON *wp = (I_WEAPON *) obj->more;
 	      
 	      if (wp->damage_p > 75)
-		repair_cost=((100-wp->damage_p)*(obj->cost))/(pow.repair_weapons[0]);
+		repair_cost=((100-wp->damage_p)*(obj->cost))/(poww.repair_weapons[0]);
 	      else if (wp->damage_p > 33)
-		repair_cost =((100-wp->damage_p)*(obj->cost))/(pow.repair_weapons[1]);
+		repair_cost =((100-wp->damage_p)*(obj->cost))/(poww.repair_weapons[1]);
 	      else
-		repair_cost =((100-wp->damage_p)*(obj->cost))/(pow.repair_weapons[2]);
+		repair_cost =((100-wp->damage_p)*(obj->cost))/(poww.repair_weapons[2]);
 	      if (repair_cost < 1)
 		continue;
 	      
@@ -378,7 +378,7 @@ do_repair (CHAR_DATA * ch, char *argy)
 	    {
 	      I_ARMOR *r = (I_ARMOR *) obj->more;
 	      repair_cost =( (r->max_condition - r->condition_now)*
-			     (obj->cost))/ (pow.repair_armors);
+			     (obj->cost))/ (poww.repair_armors);
 	      
 	      if (repair_cost < 1)
 		continue;
@@ -391,7 +391,7 @@ do_repair (CHAR_DATA * ch, char *argy)
 	      if (repair_cost > 6)
 		{
 		  repair_cost = (repair_cost) -
-		    ((pow.tinker_discount * repair_cost) / 100);
+		    ((poww.tinker_discount * repair_cost) / 100);
 		}
 	      sprintf (buf, "$N will repair $p for %d coins.", repair_cost);
 	      act (buf, ch, obj, keeper, TO_CHAR);
@@ -489,13 +489,13 @@ do_repair (CHAR_DATA * ch, char *argy)
     {
       I_WEAPON *wp = (I_WEAPON *) obj->more;
       if (wp->firstdice * wp->seconddice < 17)
-	repair_cost = (100 -wp->damage_p)*(obj->cost)/pow.repair_weapons[0];
+	repair_cost = (100 -wp->damage_p)*(obj->cost)/poww.repair_weapons[0];
       else if (wp->firstdice * wp->seconddice < 26)
-	repair_cost = (100 -wp->damage_p)*(obj->cost)/pow.repair_weapons[1];
+	repair_cost = (100 -wp->damage_p)*(obj->cost)/poww.repair_weapons[1];
       else
 	{
 	  if (LEVEL (keeper) > 75)
-	    repair_cost = (100 -wp->damage_p)*(obj->cost)/pow.repair_weapons[2];
+	    repair_cost = (100 -wp->damage_p)*(obj->cost)/poww.repair_weapons[2];
 	  else
 	    {
 	      act ("$N's eyes widen when $S sees $p.\n\r$N refuses to touch such a powerful weapon.", ch, obj, keeper, TO_CHAR);
@@ -510,7 +510,7 @@ do_repair (CHAR_DATA * ch, char *argy)
   else if (obj->pIndexData->item_type == ITEM_ARMOR)
     {
       I_ARMOR *r = (I_ARMOR *) obj->more;
-      repair_cost = (r->max_condition - r->condition_now)*(obj->cost)/pow.repair_armors;
+      repair_cost = (r->max_condition - r->condition_now)*(obj->cost)/poww.repair_armors;
       
       
       if (repair_cost < 1)
@@ -531,7 +531,7 @@ do_repair (CHAR_DATA * ch, char *argy)
       act ("...but since you are a member of the Tinker's Guild...", ch, NULL, NULL, TO_CHAR);
       if (repair_cost > 6)
 	repair_cost = (repair_cost) -
-	  ((pow.tinker_discount * repair_cost) / 100);
+	  ((poww.tinker_discount * repair_cost) / 100);
       sprintf (buf, "$N will repair $p for %d coins.", repair_cost);
       act (buf, ch, obj, keeper, TO_CHAR);
     }
@@ -632,7 +632,7 @@ do_resize (CHAR_DATA * ch, char *argy)
 	    continue;
 	  if (obj->wear_loc != -1 || OBJ_FITS (obj, ch))
 	    continue;
-	  repair_cost = obj->cost / pow.resize_divisor;
+	  repair_cost = obj->cost / poww.resize_divisor;
 	  if (repair_cost < 1)
 	    repair_cost = 1;
 	  sprintf (buf, "$N will resize $p for %d coins.", repair_cost);
@@ -677,7 +677,7 @@ do_resize (CHAR_DATA * ch, char *argy)
     }
   if (obj->pIndexData->item_type != ITEM_ARMOR)
     return;
-  repair_cost = obj->cost / pow.resize_divisor;
+  repair_cost = obj->cost / poww.resize_divisor;
   if (repair_cost < 1)
     repair_cost = 1;
   sprintf (buf, "$N will resize $p for %d coins.", repair_cost);

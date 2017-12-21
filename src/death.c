@@ -104,9 +104,9 @@ pc_death_penalty (CHAR_DATA * ch, CHAR_DATA * victim)
   bool skill_loss = FALSE;
   if (IS_MOB (victim))
     return;
-  if (IS_PLAYER (ch) && pow.skill_loss_on_pk_death)
+  if (IS_PLAYER (ch) && poww.skill_loss_on_pk_death)
     skill_loss = TRUE;
-  if (IS_MOB (ch) && pow.skill_loss_on_mob_death)
+  if (IS_MOB (ch) && poww.skill_loss_on_mob_death)
     skill_loss = TRUE;
   if (LEVEL (victim) > 10 && skill_loss)
     {
@@ -126,7 +126,7 @@ pc_death_penalty (CHAR_DATA * ch, CHAR_DATA * victim)
 	    continue;
 	  if (victim->pcdata->learned[i] < 5)
 	    continue;
-	  victim->pcdata->learned[i] -= pow.amount_lost_on_death;
+	  victim->pcdata->learned[i] -= poww.amount_lost_on_death;
 	  if (victim->pcdata->learned[i] < 1)
 	    victim->pcdata->learned[i] = 1;
 	}
@@ -793,7 +793,7 @@ group_gain (CHAR_DATA * ch, CHAR_DATA * victim)
     same_align = 1;
   if (members == 0)
     members = 1;
-  xp = translate(pow.mob_exp, LEVEL(victim), victim); 
+  xp = translate(poww.mob_exp, LEVEL(victim), victim); 
   if (IS_PLAYER(victim))
 /* THIS CHANGED PKEXP FOR WHEN YOU ATTACK THINGS STRUCTURE */
     xp *= ((LEVEL(victim)/8) * (((victim->pcdata->remort_times + 1) * 2)*6));

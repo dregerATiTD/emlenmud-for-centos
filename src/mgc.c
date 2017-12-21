@@ -559,7 +559,7 @@ do_cast (CHAR_DATA * ch, char *argy)
       send_to_char ("You are already casting a spell!\n\r", ch);
       return;
     }
-  if (IS_PLAYER(ch) && ch->pcdata->learned[gsn_ranged] > pow.max_prac_spells)
+  if (IS_PLAYER(ch) && ch->pcdata->learned[gsn_ranged] > poww.max_prac_spells)
     {
       range = 1;
       if (LEVEL(ch) > 90) range++;
@@ -760,7 +760,7 @@ do_cast (CHAR_DATA * ch, char *argy)
 	  ch->pcdata->remort_times*0;
 	check_fgt (ch);
 	ch->pcdata->tickcounts = ((spell->casting_time) * (100-bonus))/100;
-	if (ranged && (ch->pcdata->learned[gsn_ranged] > pow.max_prac_spells))
+	if (ranged && (ch->pcdata->learned[gsn_ranged] > poww.max_prac_spells))
 		ch->pcdata->tickcounts +=5;
 
 
@@ -805,7 +805,7 @@ do_actual_cast (CHAR_DATA * ch, char *argy)
       send_to_char ("The ground absorbs your magical incantations, preventing you from casting!\n\r", ch);
       return;
     }
-  if (IS_PLAYER(ch) && ch->pcdata->learned[gsn_ranged] >= pow.max_prac_spells)
+  if (IS_PLAYER(ch) && ch->pcdata->learned[gsn_ranged] >= poww.max_prac_spells)
     {
       range = 1;
       if (LEVEL(ch) > 60) range++;

@@ -592,7 +592,7 @@ void do_brew (CHAR_DATA * ch, char * argy)
 	      send_to_char("You cannot brew that kind of a potion.\n\r", ch);
 	      return;
 	    }
-	  if(ch->pcdata->learned[spell[i]->gsn] < pow.max_prac_spells)
+	  if(ch->pcdata->learned[spell[i]->gsn] < poww.max_prac_spells)
 	    {
 	      send_to_char("You do not know how to cast that spell well enough to brew it into a potion.\n\r", ch);
 	      return;
@@ -928,7 +928,7 @@ do_enchant (CHAR_DATA *ch, char* argy)
 	  send_to_char("You do not have enough health to enchant.\n\r", ch);
 	  return;
 	}
-      if (ch->pcdata->learned[gsn_enchant] < pow.max_prac_skills)
+      if (ch->pcdata->learned[gsn_enchant] < poww.max_prac_skills)
 	{
 	  send_to_char("You are not skilled enough at enchanting.\n\r", ch);
 	  return;

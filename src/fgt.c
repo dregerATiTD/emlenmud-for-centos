@@ -233,7 +233,7 @@ void do_tackle (CHAR_DATA * ch, char *argy) {
       return;
     }
 
-  if (!pow.tackle_with_weapon)
+  if (!poww.tackle_with_weapon)
   {
     if ((ch->hold1 != NULL && (ch->hold1->pIndexData->item_type == ITEM_WEAPON)))
       {
@@ -242,7 +242,7 @@ void do_tackle (CHAR_DATA * ch, char *argy) {
       }
   }
 
-  if (!pow.tackle_person_with_weapon)
+  if (!poww.tackle_person_with_weapon)
   {
       if ((victim->hold1 != NULL && (victim->hold1->pIndexData->item_type == ITEM_WEAPON || victim->hold1->pIndexData->item_type == ITEM_GEM)) || (victim->hold2 && (victim->hold2->pIndexData->item_type == ITEM_WEAPON
 || victim->hold2->pIndexData->item_type == ITEM_GEM)))
@@ -918,7 +918,7 @@ multi_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt)
 
 
   /* Kill self capabilities here */
-  if (pow.can_fight_self)
+  if (poww.can_fight_self)
     {
       if (IS_PLAYER (ch) && ch->desc != NULL && FIGHTING (ch) == NULL)
 	{
@@ -2390,7 +2390,7 @@ damage (CHAR_DATA * ch, CHAR_DATA * victim, int dam, int dt)
 	  NEW_POSITION(ch, POSITION_FIGHTING);
 	  NEW_POSITION(victim, POSITION_FIGHTING);
 
-	  if (ch!=victim || pow.can_fight_self)
+	  if (ch!=victim || poww.can_fight_self)
 	    {
 	      ch->fgt->fighting = victim;
 	    }
@@ -2925,7 +2925,7 @@ set_fighting (CHAR_DATA * ch, CHAR_DATA * victim)
 
     return;
     }
-  if (ch==victim && !pow.can_fight_self) return;
+  if (ch==victim && !poww.can_fight_self) return;
   ch->fgt->fighting = victim;
 
   if (ch->position != POSITION_GROUNDFIGHTING && ch->position != POSITION_BASHED)
@@ -3291,7 +3291,7 @@ check_same_side_pk(ch, victim);
   else if (RIDING (victim) == NULL)
     {
       if (number_range (1, 18) != 4 || !can_groundfight (victim) || LEVEL (victim) < 12
-          || !can_groundfight (ch) || LEVEL (ch) < 12 || !pow.bash_slip_to_tackle)
+          || !can_groundfight (ch) || LEVEL (ch) < 12 || !poww.bash_slip_to_tackle)
         {
           char buf[400];
           act ("$B$2Your powerful bash sends $N sprawling onto the ground!$R$7", ch, NULL, victim, TO_CHAR + 1000);
@@ -3586,14 +3586,14 @@ do_flurry (CHAR_DATA * ch, char *argy)
       return;
     }
 
-  if (ch->move < pow.flurry_mps)
+  if (ch->move < poww.flurry_mps)
     {
       send_to_char ("You are too exhausted to flurry.\n\r", ch);
       return;
     }
   victim = ch->fgt->fighting;
   check_same_side_pk(ch, victim);
-  SUBMOVE(ch,pow.flurry_mps);
+  SUBMOVE(ch,poww.flurry_mps);
   WAIT_STATE (ch, 2 * PULSE_VIOLENCE);
   act ("You open up a wild flurry of multiple attacks!", ch, NULL, victim, TO_CHAR + 1000);
   act ("$n opens up in a wild flurry of multiple attacks!", ch, NULL, victim, TO_ROOM + 1000);
@@ -4023,7 +4023,7 @@ do_flee (CHAR_DATA * ch, char *argy)
 	  return;
 	}
     }
-  if ((number_range (1, 100) < (pow.flee_chance - (IS_AUGMENTED(ch,AUG_FOOT_SPD) ? 5 : 0) - (IS_AUGMENTED(ch, AUG_LEG_SPD) ? 5 : 0) )))
+  if ((number_range (1, 100) < (poww.flee_chance - (IS_AUGMENTED(ch,AUG_FOOT_SPD) ? 5 : 0) - (IS_AUGMENTED(ch, AUG_LEG_SPD) ? 5 : 0) )))
     {
       WAIT_STATE(ch, 5);
       send_to_char("You couldn't manage to flee from combat!\n\r",ch);
@@ -4575,7 +4575,7 @@ do_tornado (CHAR_DATA * ch, char *argy)
     act("$s explodes into an agile tornado kick!", ch, NULL,victim, TO_NOTVICT);
     act ("You explode into an agile tornado kick!", ch,NULL,victim, TO_CHAR);
     act ("$n explodes into an agile tornado kick! ", ch, NULL,victim, TO_VICT);
-    SUBMOVE(ch,pow.flurry_mps);
+    SUBMOVE(ch,poww.flurry_mps);
     if (IS_PLAYER (ch) && number_range (1, 5) == 2)
       skill_gain (ch, gsn_tornado, TRUE);
 

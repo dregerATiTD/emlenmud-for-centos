@@ -95,7 +95,7 @@ spell_summon (int sn, int level, CHAR_DATA * ch, void *vo)
       send_to_char("Your victim has recently cast a spell of great power and you cannot get a lock on them.\n\r", ch);
       return;
     }
-  if (IS_MOB (vict) && !pow.can_summon_mobs)
+  if (IS_MOB (vict) && !poww.can_summon_mobs)
     {
       send_to_char ("The spell failed.\n\r", ch);
       return;

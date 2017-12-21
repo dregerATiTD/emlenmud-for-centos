@@ -193,9 +193,9 @@ pval (int i)
   rv[0] = '\0';
   for (j = 0; j < 20; j++)
     {
-      if (pow.armor_lev_word[j] && i >= pow.armor_lev_min[j] && i <= pow.armor_lev_max[j])
+      if (poww.armor_lev_word[j] && i >= poww.armor_lev_min[j] && i <= poww.armor_lev_max[j])
 	{
-	  sprintf (rv, pow.armor_lev_word[j]);
+	  sprintf (rv, poww.armor_lev_word[j]);
 	  return rv;
 	}
     }

@@ -37,7 +37,7 @@ do_where (CHAR_DATA * ch, char *argy)
 
 
   one_argy (argy, arg);
-    if (!pow.allow_where)
+    if (!poww.allow_where)
     {
       send_to_char ("Huh?\n\r", ch);
       return;

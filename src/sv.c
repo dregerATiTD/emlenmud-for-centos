@@ -8,6 +8,8 @@
 #ifndef WINDOWS
 #include <sys/errno.h>
 #include <signal.h>
+#define _GNU_SOURCE
+#include <stdlib.h>
 #endif
 
 

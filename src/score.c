@@ -231,7 +231,7 @@ do_attribute (CHAR_DATA * ch, char *argy)
   DEFINE_COMMAND ("attribute", do_attribute, POSITION_DEAD, 0, LOG_NORMAL, "This command shows you various info about your character.")
     if (IS_MOB (ch))
 	return;
-  if (LEVEL (ch) < pow.level_to_see_numeric_stats)
+  if (LEVEL (ch) < poww.level_to_see_numeric_stats)
     {
       char strg[40];
       char con[40];
@@ -346,7 +346,7 @@ do_info (CHAR_DATA * ch, char *argy)
   int bonushit;
   DEFINE_COMMAND ("information", do_info, POSITION_DEAD, 0, LOG_NORMAL, "This command shows you an info page about your character.")
 
-    if (LEVEL (ch) < MAX_LEVEL && FIGHTING (ch) != NULL && !pow.score_while_fighting)
+    if (LEVEL (ch) < MAX_LEVEL && FIGHTING (ch) != NULL && !poww.score_while_fighting)
     {
       send_to_char ("You cannot info while fighting!\n\r", ch);
       return;
@@ -396,7 +396,7 @@ do_info (CHAR_DATA * ch, char *argy)
 	   (tvict->pcdata->condition[COND_DRUNK] > 10 ? "\x1B[1;37m\x1B[5mDrunk\x1B[0m" : " "));
   send_to_char (buf, ch);
   send_to_char ("+--------------------------------------------------------------------------+\n\r", ch);
-  if (LEVEL(ch) >= pow.level_to_see_numeric_stats){
+  if (LEVEL(ch) >= poww.level_to_see_numeric_stats){
   sprintf (buf, "\x1B[1;34m Str: \x1B[37m%-2d \x1B[34mInt: \x1B[37m%-2d \x1B[34mWis: \x1B[37m%-2d \x1B[34mDex: \x1B[37m%-2d \x1B[34mCon: \x1B[37m%-2d\x1B[37;0m Alignmt: \x1B[1;37m%d\n\r",
 	   get_curr_str (tvict), get_curr_int (tvict), get_curr_wis (tvict),
 	   get_curr_dex (tvict), get_curr_con (tvict), ALIGN (tvict));
@@ -456,7 +456,7 @@ do_quickscore (CHAR_DATA * ch, char *argy)
 {
   int pos;
   DEFINE_COMMAND ("sco", do_quickscore, POSITION_DEAD, 0, LOG_NORMAL, "This command shows a brief summary of your character.")
-    if (FIGHTING (ch) && !pow.score_while_fighting)
+    if (FIGHTING (ch) && !poww.score_while_fighting)
     {
       send_to_char ("You cannot use this command during combat.\n\r", ch);
       return;
@@ -483,7 +483,7 @@ do_vscore (CHAR_DATA * ch, char *argy)
   int pos;
   DEFINE_COMMAND ("vscore", do_vscore, POSITION_DEAD, 0, LOG_NORMAL, "This command shows you complete information about your character.")
 
-    if (FIGHTING (ch) && !pow.score_while_fighting)
+    if (FIGHTING (ch) && !poww.score_while_fighting)
     {
       send_to_char ("You cannot use this command during combat.\n\r", ch);
       return;
@@ -506,7 +506,7 @@ do_score (CHAR_DATA * ch, char *argy)
 {
   int pos;
   DEFINE_COMMAND ("score", do_score, POSITION_DEAD, 0, LOG_NORMAL, "This command shows you complete information about your character.")
-    if (FIGHTING (ch) && !pow.score_while_fighting)
+    if (FIGHTING (ch) && !poww.score_while_fighting)
     {
       send_to_char ("You cannot use this command during combat.\n\r", ch);
       return;

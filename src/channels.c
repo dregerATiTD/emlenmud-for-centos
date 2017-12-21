@@ -100,7 +100,7 @@ channel_function (CHAR_DATA * ch, char *argy, CHANNEL * c, int channel, char *te
     {
       if (*t == '$')
 	{
-	  if (!pow.morts_use_color_chat && LEVEL (ch) < IMM_LEVEL)
+	  if (!poww.morts_use_color_chat && LEVEL (ch) < IMM_LEVEL)
 	    {
 	      send_to_char ("You can not use $ in a channel.\n\r", ch);
 	      return;
@@ -1029,7 +1029,7 @@ do_tell (CHAR_DATA * ch, char *argy)
     {
       if (*t == '$')
 	{
-	  if (!pow.morts_use_color_chat && LEVEL (ch) < IMM_LEVEL)
+	  if (!poww.morts_use_color_chat && LEVEL (ch) < IMM_LEVEL)
 	    {
 	      send_to_char ("You can not use $ in a channel.\n\r", ch);
 	      return;

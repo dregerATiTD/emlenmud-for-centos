@@ -1767,13 +1767,13 @@ process_output (DESCRIPTOR_DATA * d, bool fPrompt)
 char looking_for[500];
 
 int
-do_grepit (DESCRIPTOR_DATA * d, char *txt, int max_lines)
+do_grepit (DESCRIPTOR_DATA * d, const char *txt, int max_lines) //JWTJWT added const to *txt to eliminate warnings
 {
   char oneline[2000];
   int i = 0;
   int total = 0;
   int lines = 0;
-  char *t;
+  const char *t; //JWTJWT added const to *t to eliminate warnings
   grep[0] = '\0';
   for (t = txt; *t != '\0'; t++)
   {
@@ -1823,8 +1823,8 @@ void
 write_to_buffer (DESCRIPTOR_DATA * d, const char *txt, int length)
 {
   char buf[10001];
-  char *o;
-  char *tx = NULL;
+  const char *o; //JWTJWT added const to *o to eliminate warnings
+  const char *tx = NULL; //JWTJWT added const to *tx to eliminate warnings
   if (!d)
     return;
   if (grep[0] != '\0' && gr &&
@@ -2128,7 +2128,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
   case 9321: // which is ???? 
     {
       
-      if (argy[0] == '\0' || argy[0] == "") {
+      if (argy[0] == '\0') { //JWTJWT can't have an argy[0] that == "" or '' as it would be '\0'
         d->connected = 9321;
         SET_BIT(d->act, DESC_ROLLING);
       } else if (UPPER (argy[0]) == 'K' && IS_SET(d->act, DESC_ROLLED_YET)) {
@@ -2217,7 +2217,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
         ch->pcdata->temp_room = get_room_index (race_info[ch->pcdata->race].start_room);
         set_initial_hp (ch);
         ch->pcdata->level = 0;
-        if ((IS_SET(d->act, DESC_WRONG_PWD) || pow.validation) && !IS_SET (ch->act, ACT_UNVAL))
+        if ((IS_SET(d->act, DESC_WRONG_PWD) || poww.validation) && !IS_SET (ch->act, ACT_UNVAL))
           ch->act |= ACT_UNVAL;
         conv_height (ch);
         sprintf (buf, "the %s Adventurer", race_info[ch->pcdata->race].name);
@@ -2226,7 +2226,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
         ch->pcdata->n_mana = ch->pcdata->n_max_mana;
       } // close ROLLING
       
-      if (pow.allow_rerolls) {
+      if (poww.allow_rerolls) {
         if (IS_SET(d->act, DESC_ROLLING))  
           do_attribute (ch, "");
         send_to_char ("[K]eep, [R]eroll/Enter [C]hange roll:\n\r",ch);	    
@@ -2690,7 +2690,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
               iRace = 1000;
             if (iRace >= RACE_COUNT || !is_number (argy) || iRace < 0 ||
               !str_prefix ("Blank", race_info[iRace].name) ||
-              (!pow.all_newbies_good && race_info[iRace].start_room != 100) || race_info[iRace].remort_race)
+              (!poww.all_newbies_good && race_info[iRace].start_room != 100) || race_info[iRace].remort_race)
             {
               
               write_to_buffer (d, "\n\r\n\r\x1B[2J\x1B[1;1f", 0);
@@ -2861,7 +2861,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
               ch->pcdata->temp_room = get_room_index (race_info[ch->pcdata->race].start_room);
               set_initial_hp (ch);
               ch->pcdata->level = 0;
-              if ((IS_SET(d->act, DESC_WRONG_PWD) || pow.validation) && !IS_SET (ch->act, ACT_UNVAL))
+              if ((IS_SET(d->act, DESC_WRONG_PWD) || poww.validation) && !IS_SET (ch->act, ACT_UNVAL))
                 ch->act |= ACT_UNVAL;
               conv_height (ch);
               sprintf (buf, "the %s Adventurer", race_info[ch->pcdata->race].name);
@@ -3029,7 +3029,7 @@ void handle_connecting (DESCRIPTOR_DATA * d, char *argy) {
                 ch->pcdata->temp_room = get_room_index (race_info[ch->pcdata->race].start_room);
                 set_initial_hp (ch);
                 ch->pcdata->level = 0;
-                //if ((IS_SET(d->act, DESC_WRONG_PWD) || pow.validation) && !IS_SET (ch->act, ACT_UNVAL))
+                //if ((IS_SET(d->act, DESC_WRONG_PWD) || poww.validation) && !IS_SET (ch->act, ACT_UNVAL))
                 //  ch->act |= ACT_UNVAL;
                 conv_height (ch);
                 sprintf (buf, "the Ascended %s", race_info[ch->pcdata->race].name);
@@ -3181,13 +3181,13 @@ DEATH)?", 0); */
           OBJ_PROTOTYPE *oid;
           for (jj = 0; jj < 10; jj++)
           {
-            if (pow.newbie_object[jj] == 0 || ((oid = get_obj_index (pow.newbie_object[jj])) == NULL))
+            if (poww.newbie_object[jj] == 0 || ((oid = get_obj_index (poww.newbie_object[jj])) == NULL))
               continue;
             newBobj = create_object (oid, 1);
             obj_to (newBobj, ch);
           }
         }
-        if (IS_SET(d->act, DESC_WRONG_PWD) || pow.validation)
+        if (IS_SET(d->act, DESC_WRONG_PWD) || poww.validation)
         {
           FILE *fpp;
           char buffr2[500];
@@ -3222,9 +3222,9 @@ DEATH)?", 0); */
           
           ch->pcdata->temp_room = get_room_index (race_info[ch->pcdata->race].start_room);
           save_char_obj (ch);
-          if (pow.validation)
+          if (poww.validation)
           {
-            sprintf (buffr2, "mail %s < newbie.tmp &", pow.email_to);
+            sprintf (buffr2, "mail %s < newbie.tmp &", poww.email_to);
             system (buffr2);
           }
           sprintf (buffr2, "mail %s < newbie.tmp &", d->character->pcdata->email);

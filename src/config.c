@@ -467,7 +467,7 @@ void
 do_prompt (CHAR_DATA * ch, char *argy)
 {
   DEFINE_COMMAND ("prompt", do_prompt, POSITION_DEAD, 0, LOG_NORMAL, "This command toggles your prompt on or off.")
-    if (pow.player_prompt && !str_cmp (argy, "all"))
+    if (poww.player_prompt && !str_cmp (argy, "all"))
     {
       send_to_char ("Pick a default prompt by using 'prompt <letter>':\n\r", ch);
       send_to_char ("[A] ", ch);
@@ -510,7 +510,7 @@ do_prompt (CHAR_DATA * ch, char *argy)
       set_default_prompt (ch, argy[0]);
       return;
     }
-  if (pow.player_prompt && argy[0] != '\0')
+  if (poww.player_prompt && argy[0] != '\0')
     {
       if (!check_pr (argy))
         {

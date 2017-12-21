@@ -1,9 +1,12 @@
+#ifndef WINDOWS
+#define _GNU_SOURCE
+#include <string.h>
+#endif
 #include <stdlib.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <time.h>
 #include "emlen.h"
-
 void 
 decode (CHAR_DATA * ch, char *argy)
 {

@@ -388,7 +388,7 @@ ch->in_room->more->copper);
 	  {
 	    char name[SML_LENGTH];
 	    char *pd;
-	    if (!pow.get_from_corpse_while_in_combat && FIGHTING (ch))
+	    if (!poww.get_from_corpse_while_in_combat && FIGHTING (ch))
 	      {
 		send_to_char ("You don't have time to loot the corpse while you are fighting!\n\r", ch);
 		return;
@@ -400,7 +400,7 @@ ch->in_room->more->copper);
 	    pd = one_argy (pd, name);
 	    pd = one_argy (pd, name);
 	    /*name now equals the name of the person */
-	    if (IS_PLAYER(ch) && LEVEL(ch)<=pow.loot_level && str_cmp(name,NAME(ch))) 
+	    if (IS_PLAYER(ch) && LEVEL(ch)<=poww.loot_level && str_cmp(name,NAME(ch))) 
 	      {
 		send_to_char("You cannot loot another person's corpse at that low level.\n\r",ch);
 		return;
@@ -1125,7 +1125,7 @@ do_give (CHAR_DATA * ch, char *argy)
   char buf[STD_LENGTH];
   DEFINE_COMMAND ("give", do_give, POSITION_RESTING, 0, LOG_NORMAL, "This command allows you to give something to someone.")
 
-    if (FIGHTING (ch) && !pow.give_while_fighting)
+    if (FIGHTING (ch) && !poww.give_while_fighting)
     {
       send_to_char ("You may not give objects while fighting!\n\r", ch);
       return;
@@ -2520,7 +2520,7 @@ do_wear (CHAR_DATA * ch, char *argy)
   if (!str_cmp (arg1, "all"))
     {
       SINGLE_OBJECT *obj_next;
-      if (FIGHTING (ch) != NULL && !pow.equip_in_combat)
+      if (FIGHTING (ch) != NULL && !poww.equip_in_combat)
 	{
 	  send_to_char ("Not while you're fighting; you'd get creamed!\n\r", ch);
 	  return;
@@ -2555,7 +2555,7 @@ do_wear (CHAR_DATA * ch, char *argy)
 	    return;
 	  }
 
-      if (FIGHTING (ch) != NULL && !pow.equip_in_combat && !CAN_WEAR (obj, ITEM_HOLD))
+      if (FIGHTING (ch) != NULL && !poww.equip_in_combat && !CAN_WEAR (obj, ITEM_HOLD))
 	{
 	  send_to_char ("Not while you're fighting; you'd get creamed!\n\r", ch);
 	  return;
@@ -2641,7 +2641,7 @@ do_remove (CHAR_DATA * ch, char *argy)
   if (!str_cmp (argy, "all"))
     {
       SINGLE_OBJECT *obj_next;
-      if (!pow.remove_while_fighting && FIGHTING (ch))
+      if (!poww.remove_while_fighting && FIGHTING (ch))
 	{
 	  send_to_char ("No way; you'd get creamed!\n\r", ch);
 	  return;
@@ -2667,7 +2667,7 @@ do_remove (CHAR_DATA * ch, char *argy)
       return;
     }
 
-  if (!pow.remove_while_fighting && obj->wear_loc != WEAR_HOLD_1 &&
+  if (!poww.remove_while_fighting && obj->wear_loc != WEAR_HOLD_1 &&
       obj->wear_loc != WEAR_HOLD_2 && FIGHTING (ch))
     {
       send_to_char ("No way; you'd get creamed!\n\r", ch);
@@ -2740,7 +2740,7 @@ do_sacrifice (CHAR_DATA * ch, char *argy)
     }
 
   n_god = number_range (0, 4);
-  god = pow.god_names[n_god];
+  god = poww.god_names[n_god];
 
 //TEMPORARY TO TRY TO LET CASTERS EXP
 //Lowered Wisdom Requirement - Sabelis 

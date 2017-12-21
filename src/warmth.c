@@ -12,7 +12,7 @@ check_body_temp (CHAR_DATA * ch)
   int warmth;
   SINGLE_OBJECT *obj;
   int temp = cur_temp (ch);
-  if (!pow.weather || number_range (1, 3) != 2)
+  if (!poww.weather || number_range (1, 3) != 2)
     return FALSE;
   if (IS_MOB (ch) || !ch->in_room || ch->in_room->sector_type == SECT_INSIDE ||
       (!IS_OUTSIDE(ch) || ch->in_room->sector_type >= SECT_CAVE || !IS_SET(ch->in_room->room_flags, ROOM_INDOORS)) || IS_SET (ch->act, PLR_HOLYWALK))

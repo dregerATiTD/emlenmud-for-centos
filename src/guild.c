@@ -199,11 +199,11 @@ do_guild (CHAR_DATA * ch, char *argy)
   if (!str_cmp (arg1, "join"))
     {
       int num = get_num_guilds(ch);
-      int remorts = pow.guild_info[num][0];
-      int lvl = pow.guild_info[num][1];
-      int cst = (pow.guild_info[num][2] * 100);
-      int wps = pow.guild_info[num][3];
-      int kps = pow.guild_info[num][4];
+      int remorts = poww.guild_info[num][0];
+      int lvl = poww.guild_info[num][1];
+      int cst = (poww.guild_info[num][2] * 100);
+      int wps = poww.guild_info[num][3];
+      int kps = poww.guild_info[num][4];
       bool can_join = TRUE;
       if (IS_SET (ch->pcdata->guilds, mob->pIndexData->act3 ))
 	{
@@ -292,7 +292,7 @@ for (guild = 0; guild < 8; ++guild)
       else
 	sprintf(buf, "   ");
       send_to_char(buf, ch);
-      sprintf(buf, "Guild: %1d, Remorts:%2d, Level: %2d, Gold:%5d, Wps:%5d, Kps %5d\n\r", (guild+1), pow.guild_info[guild][0], pow.guild_info[guild][1], pow.guild_info[guild][2], pow.guild_info[guild][3], pow.guild_info[guild][4]);
+      sprintf(buf, "Guild: %1d, Remorts:%2d, Level: %2d, Gold:%5d, Wps:%5d, Kps %5d\n\r", (guild+1), poww.guild_info[guild][0], poww.guild_info[guild][1], poww.guild_info[guild][2], poww.guild_info[guild][3], poww.guild_info[guild][4]);
       send_to_char(buf, ch);
       if ((guild == guild_num))
 	{

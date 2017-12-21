@@ -194,7 +194,7 @@ do_tauction (CHAR_DATA * ch, char *argy)	/*By Owen Emlen */
       send_to_char ("But you aren't even listening to the auction channel!\n\r", ch);
       return;
     }
-  if (pow.auction_lag && ch->pcdata->no_quit_pk > 0) 
+  if (poww.auction_lag && ch->pcdata->no_quit_pk > 0) 
     {
       send_to_char("You must wait for your PKill no-quit timer to run out before you auction.\n\r",ch);
       return;

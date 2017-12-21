@@ -43,7 +43,7 @@ int ti = 5;
 DAM_MSG dmsg;
 CHR_FUNCTION *cf = NULL;
 COMMAND *command_hash[256];
-POWER pow;
+POWER poww;
 bool alliance[NUM_ALIGN][NUM_ALIGN];
 int commands = 0;
 extern char str_boot_time[];
@@ -387,7 +387,7 @@ sleepy_time (void)
 void
 set_mob_xp (CHAR_DATA * mob)
 {
-  mob->exp = translate (pow.mob_exp, LEVEL (mob), mob);
+  mob->exp = translate (poww.mob_exp, LEVEL (mob), mob);
   if (LEVEL (mob) < 7)
     mob->exp /= 2;
   if (mob->armor < 70)
@@ -3065,9 +3065,9 @@ fread_and_compress_string (FILE * fp, CHAR_DATA * ch)
   char c;
 
   plast = top_string + sizeof (char *);
-  if (plast > &string_space[pow.space_needed - STD_LENGTH])
+  if (plast > &string_space[poww.space_needed - STD_LENGTH])
     {
-      bug ("Fread_string: SPACE_NEEDED %d exceeded.", pow.space_needed);
+      bug ("Fread_string: SPACE_NEEDED %d exceeded.", poww.space_needed);
       exit (1);
     }
 
@@ -3172,9 +3172,9 @@ fread_string (FILE * fp, CHAR_DATA * ch)
   char c;
 
   plast = top_string + sizeof (char *);
-  if (plast > &string_space[pow.space_needed - STD_LENGTH])
+  if (plast > &string_space[poww.space_needed - STD_LENGTH])
     {
-      bug ("Fread_string: SPACE_NEEDED %d exceeded.", pow.space_needed);
+      bug ("Fread_string: SPACE_NEEDED %d exceeded.", poww.space_needed);
       exit (1);
     }
 
@@ -3277,9 +3277,9 @@ fread_string_eol (FILE * fp)
     }
 
   plast = top_string + sizeof (char *);
-  if (plast > &string_space[pow.space_needed - STD_LENGTH])
+  if (plast > &string_space[poww.space_needed - STD_LENGTH])
     {
-      bug ("Fread_string: SPACE_NEEDED %d exceeded.", pow.space_needed);
+      bug ("Fread_string: SPACE_NEEDED %d exceeded.", poww.space_needed);
       exit (1);
     }
 

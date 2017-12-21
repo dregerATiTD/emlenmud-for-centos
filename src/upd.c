@@ -288,7 +288,7 @@ advance_level (CHAR_DATA * ch)
     return;
 
   add_level_bonuses (ch, 1);
-  add_prac = (pow.practice_percent * wis_app[get_curr_wis (ch) - 1].practice) / 100;
+  add_prac = (poww.practice_percent * wis_app[get_curr_wis (ch) - 1].practice) / 100;
     add_learn = LEVEL (ch) < 4 ? 2 : 1;
 
   ch->pcdata->practice += add_prac;
@@ -317,7 +317,7 @@ gain_exp (CHAR_DATA * ch, int gain)
       return;
   
   ch->exp += gain;
-  while (LEVEL (ch) < pow.max_level && ch->exp >= FIND_EXP (LEVEL (ch), ch->pcdata->race))
+  while (LEVEL (ch) < poww.max_level && ch->exp >= FIND_EXP (LEVEL (ch), ch->pcdata->race))
     {
       send_to_char ("You have become more powerful!\n\r", ch);
       sprintf (general_use,
@@ -326,7 +326,7 @@ gain_exp (CHAR_DATA * ch, int gain)
       ch->pcdata->level++;
       advance_level (ch);
       if (ALIGN(ch) == 0)
-      if (ch->pcdata->remort_times == 0 && ch->pcdata->level == pow.level_to_choose -1)
+      if (ch->pcdata->remort_times == 0 && ch->pcdata->level == poww.level_to_choose -1)
 	{
 	  send_to_char("You must choose your alignment next level!!!!\n\r", ch);
 	  send_to_char("\x1b[1;31mPlease type help choose and aligninfo to help you decide.\n\r", ch);
@@ -337,10 +337,10 @@ gain_exp (CHAR_DATA * ch, int gain)
       if (ii > 0)
 	clan_notify (general_use, ii);
       if (ALIGN(ch) == 0)
-      if (LEVEL(ch) == pow.level_to_choose && ch->pcdata->remort_times == 0 && pow.choose_in_room != 0 && get_room_index(pow.choose_in_room) != NULL)
+      if (LEVEL(ch) == poww.level_to_choose && ch->pcdata->remort_times == 0 && poww.choose_in_room != 0 && get_room_index(poww.choose_in_room) != NULL)
 	{
 	  char_from_room(ch);
-	  char_to_room(ch, get_room_index(pow.choose_in_room));
+	  char_to_room(ch, get_room_index(poww.choose_in_room));
 	  do_look(ch, "auto");
 	  send_to_char("You must now choose which path you wish to take: Evil or Good.\n\r", ch);
 	}
@@ -380,8 +380,8 @@ mana_gain (CHAR_DATA * ch, short hehe)
 
   if (ch->pcdata->n_mana < ch->pcdata->n_max_mana && hehe != 2)
     {
-      int tt = pow.base_mana_regen_bonus +
-	((ch->position == POSITION_MEDITATING) ? pow.med_mana_regen_bonus : 0 )+
+      int tt = poww.base_mana_regen_bonus +
+	((ch->position == POSITION_MEDITATING) ? poww.med_mana_regen_bonus : 0 )+
 	(IS_AUGMENTED(ch, AUG_MIND_FOCUS) ? 1 : 0) +
 	(IS_AUGMENTED(ch, AUG_MIND_POWER)? 1 : 0) +
 	(IS_AUGMENTED(ch, AUG_MANA_BOOST) ? 1 : 0);
@@ -490,14 +490,14 @@ hit_gain (CHAR_DATA * ch)
   int gain;
   if (FIGHTING (ch))
     return 0;
-  gain = pow.base_hp_regen;
+  gain = poww.base_hp_regen;
   switch (ch->position)
     {
     case POSITION_SLEEPING:
-      gain += pow.hp_bonus_sleeping + (number_range (1, get_curr_con (ch) / 4));
+      gain += poww.hp_bonus_sleeping + (number_range (1, get_curr_con (ch) / 4));
       break;
     case POSITION_RESTING:
-      gain += pow.hp_bonus_resting + (number_range (1, get_curr_con (ch) / 8));
+      gain += poww.hp_bonus_resting + (number_range (1, get_curr_con (ch) / 8));
       break;
     }
 #ifdef NEW_WORLD
@@ -548,14 +548,14 @@ move_gain (CHAR_DATA * ch)
   int gain = 0;
   if (FIGHTING (ch))
     return 1;
-  gain = pow.base_mp_regen;
+  gain = poww.base_mp_regen;
   switch (ch->position)
     {
     case POSITION_SLEEPING:
-      gain += pow.mp_bonus_sleeping + get_curr_dex (ch) / 2;
+      gain += poww.mp_bonus_sleeping + get_curr_dex (ch) / 2;
       break;
     case POSITION_RESTING:
-      gain += pow.mp_bonus_resting + get_curr_dex (ch) / 3;
+      gain += poww.mp_bonus_resting + get_curr_dex (ch) / 3;
       break;
     }
   if (IS_PLAYER (ch))
@@ -1688,7 +1688,7 @@ char_update (void)
           if (plague != ch
               && !IS_AFFECTED (plague, AFF_PLAGUE)
               && LEVEL (plague) >= 10 &&
-              number_range (1, 100) < pow.plague_chance)
+              number_range (1, 100) < poww.plague_chance)
           {
             bzero (&af, sizeof (af));
             af.type = gsn_plague;
@@ -2048,7 +2048,7 @@ transport_update (void)
 		     ADDMOVE (ch, number_range(10, 30));
 		}
 	    }
-	  if (ALIGN(ch)==1 && IN_SUN(ch) && pow.penalize_evil_in_sun == TRUE)
+	  if (ALIGN(ch)==1 && IN_SUN(ch) && poww.penalize_evil_in_sun == TRUE)
 	    {
 	      if (number_range(1,8) == 3)
 	      {	      

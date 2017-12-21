@@ -3220,7 +3220,7 @@ struct social_type
 
 #define STRING_MOVES(ch)        (percent_tired[ (URANGE(0,(PERCENTAGE((ch)->move, (ch)->max_move)),101))/10 ]  )
 
-#define FIND_EXP(lv, r)         (translate(pow.exp_to_level,lv,NULL))
+#define FIND_EXP(lv, r)         (translate(poww.exp_to_level,lv,NULL))
 
 #define DIFF_ALIGN(ch, victim)  (!alliance[ALIGN((ch))][ALIGN((victim))])
 
@@ -3478,7 +3478,7 @@ extern CHAR_DATA *aggro_check;
 extern int ti;
 extern bool oldflag;
 extern DAM_MSG dmsg;
-extern POWER pow;
+extern POWER poww;
 extern SHELL *shell_first;
 extern bool fLogAll;
 extern CHANNEL *chan_first;

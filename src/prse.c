@@ -163,7 +163,7 @@ parse_txt (char *code, CHAR_DATA * ch)
     case 'C':
       if (!str_infix ("con", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", get_curr_con (ch));
 	  else
 	    sprintf(bf, "XX");
@@ -250,7 +250,7 @@ align_info[ch->pcdata->alignment].max_profs+ (ch->pcdata->remort_times+1)/2) - t
     case 'D':
       if (!str_infix ("dex", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", get_curr_dex (ch));
 	  else 
 	    sprintf(bf, "XX");
@@ -347,7 +347,7 @@ align_info[ch->pcdata->alignment].max_profs+ (ch->pcdata->remort_times+1)/2) - t
     case 'I':
       if (!str_infix ("int", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", get_curr_int (ch));
 	  else 
 	    sprintf(bf, "XX");
@@ -505,35 +505,35 @@ align_info[ch->pcdata->alignment].max_profs+ (ch->pcdata->remort_times+1)/2) - t
     case 'Q':
       if (!str_infix ("qstr", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", ch->pcdata->stat[0]);
 	  else 
 	    sprintf(bf, "XX");  
 	}
       else if (!str_infix ("qint", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", ch->pcdata->stat[1] );
 	  else 
 	    sprintf(bf, "XX");  
 	}
       else if (!str_infix ("qwis", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", ch->pcdata->stat[2]);
 	  else 
 	    sprintf(bf, "XX");  
 	}
       else if (!str_infix ("qdex", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", ch->pcdata->stat[3]);
 	  else 
 	    sprintf(bf, "XX");
      }
       else if (!str_infix ("qcon", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", ch->pcdata->stat[4]);
 	  else 
 	    sprintf(bf, "XX");  
@@ -570,7 +570,7 @@ align_info[ch->pcdata->alignment].max_profs+ (ch->pcdata->remort_times+1)/2) - t
     case 'S':
       if (!str_infix ("str", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", get_curr_str (ch));
 	  else 
 	    sprintf(bf, "XX");
@@ -643,7 +643,7 @@ code))
     case 'W':
       if (!str_infix ("wis", code))
 	{
-	  if( LEVEL(ch) >= pow.level_to_see_numeric_stats)
+	  if( LEVEL(ch) >= poww.level_to_see_numeric_stats)
 	    sprintf (bf, "%d", get_curr_wis (ch));
 	  else 
 	    sprintf(bf, "XX");

@@ -33,7 +33,7 @@ show_remort_requirements(CHAR_DATA * ch, char *argy)
 {
   char buf[500];
   int remort = 0;
-  for (remort = 0; remort < pow.max_remorts; ++remort)
+  for (remort = 0; remort < poww.max_remorts; ++remort)
     {
       if((remort == ch->pcdata->remort_times))
 	sprintf(buf,"-->");
@@ -42,10 +42,10 @@ show_remort_requirements(CHAR_DATA * ch, char *argy)
       send_to_char(buf, ch);
       //Non Ascended Remort Requirements
       if (ch->pcdata->race < 9)
-         sprintf(buf, "Remort: %2d, Lvl: %2d, Wps Req/Lost: %5d/%5d, Kps Req/Lost: %5d/%5d\n\r", (remort+1), pow.remort_req[remort][0], pow.remort_req[remort][1], pow.remort_req[remort][2],pow.remort_req[remort][3], pow.remort_req[remort][4]);
+         sprintf(buf, "Remort: %2d, Lvl: %2d, Wps Req/Lost: %5d/%5d, Kps Req/Lost: %5d/%5d\n\r", (remort+1), poww.remort_req[remort][0], poww.remort_req[remort][1], poww.remort_req[remort][2],poww.remort_req[remort][3], poww.remort_req[remort][4]);
       //Ascended Remort Requirements
       if (ch->pcdata->race > 8)
-         sprintf(buf, "Remort: %2d, Lvl: %2d, Wps Req/Lost: %5d/%5d, Kps Req/Lost: %5d/%5d\n\r", (remort+1), pow.ascended_remort_req[remort][0], pow.ascended_remort_req[remort][1], pow.ascended_remort_req[remort][2], pow.ascended_remort_req[remort][3], pow.ascended_remort_req[remort][4]);
+         sprintf(buf, "Remort: %2d, Lvl: %2d, Wps Req/Lost: %5d/%5d, Kps Req/Lost: %5d/%5d\n\r", (remort+1), poww.ascended_remort_req[remort][0], poww.ascended_remort_req[remort][1], poww.ascended_remort_req[remort][2], poww.ascended_remort_req[remort][3], poww.ascended_remort_req[remort][4]);
       send_to_char(buf, ch);
       if ((remort == ch->pcdata->remort_times))
 	{
@@ -53,7 +53,7 @@ show_remort_requirements(CHAR_DATA * ch, char *argy)
 	  send_to_char(buf, ch);
 	}
     }
-   if (ch->pcdata->remort_times >= pow.max_remorts)
+   if (ch->pcdata->remort_times >= poww.max_remorts)
       send_to_char("You have the maximum number of remorts.\n\r", ch);
 return;
 }
@@ -134,7 +134,7 @@ str_cmp(race_info[iRace].name,"blank"))
 	     race_info[iRace].max_spells, race_info[iRace].max_profs);
     send_to_char(buf, ch);
     
-    if (pow.show_race_select_info || ch->pcdata->level > 0)
+    if (poww.show_race_select_info || ch->pcdata->level > 0)
       {
 	sprintf (buf, "Natural Armor Bonus:\x1B[1;34m%d\x1B[0;37m.\n\rStat limits: \x1B[1;35mS: %d  D: %d  C: %d  I: %d W: %d\x1B[0;37m.\n\r",
 		 (100 - race_info[iRace].natarmor),
@@ -391,12 +391,12 @@ do_ascend (CHAR_DATA * ch, char * argy)
   if (!str_cmp (argy, "cost"))
   {
     send_to_char ("Ascension Requirements:\n\r", ch);
-    sprintf (buf4, "Lvl: %2d Remorts: %2d Wpts: %4d Ttl Wpts: %4d\n\r", pow.ascension_req[0], pow.ascension_req[1], pow.ascension_req[2], pow.ascension_req[3]);
+    sprintf (buf4, "Lvl: %2d Remorts: %2d Wpts: %4d Ttl Wpts: %4d\n\r", poww.ascension_req[0], poww.ascension_req[1], poww.ascension_req[2], poww.ascension_req[3]);
     send_to_char (buf4, ch);
     return;
   }
-  if (pow.ascension_req[4] > 0 && get_room_index(pow.ascension_req[4]) != NULL
-      && ch->in_room->vnum != pow.ascension_req[4] )
+  if (poww.ascension_req[4] > 0 && get_room_index(poww.ascension_req[4]) != NULL
+      && ch->in_room->vnum != poww.ascension_req[4] )
   {
     send_to_char ("You are not in the proper place to Ascend!\n\r", ch);
     return;
@@ -411,27 +411,27 @@ do_ascend (CHAR_DATA * ch, char * argy)
     send_to_char ("You must be standing to ascend!\n\r", ch);
     return;
   }
-  if (LEVEL(ch) < pow.ascension_req[0])
+  if (LEVEL(ch) < poww.ascension_req[0])
   {
-    sprintf (buf4, "You must be at least level %d in order to ascend.\n\r", pow.ascension_req[0]);
+    sprintf (buf4, "You must be at least level %d in order to ascend.\n\r", poww.ascension_req[0]);
     send_to_char (buf4, ch);
     return;
   }
-  if (ch->pcdata->remort_times < pow.ascension_req[1])
+  if (ch->pcdata->remort_times < poww.ascension_req[1])
   {
-    sprintf (buf4, "You must have remorted at least %d times in order to ascend.\n\r", pow.ascension_req[1]);
+    sprintf (buf4, "You must have remorted at least %d times in order to ascend.\n\r", poww.ascension_req[1]);
     send_to_char (buf4, ch);
     return;
   }
-  if (ch->pcdata->warpoints < pow.ascension_req[2])
+  if (ch->pcdata->warpoints < poww.ascension_req[2])
   {
-    sprintf (buf4, "You must have at least %d current warpoints in order to ascend.\n\r", pow.ascension_req[2]);
+    sprintf (buf4, "You must have at least %d current warpoints in order to ascend.\n\r", poww.ascension_req[2]);
     send_to_char (buf4, ch);
     return;
   }
-  if (ch->pcdata->total_wps < pow.ascension_req[3])
+  if (ch->pcdata->total_wps < poww.ascension_req[3])
   {
-    sprintf (buf4, "You must have accumulated at least %d total warpoints in order to ascend.\n\r", pow.ascension_req[3]);
+    sprintf (buf4, "You must have accumulated at least %d total warpoints in order to ascend.\n\r", poww.ascension_req[3]);
     send_to_char (buf4, ch);
     return;
   }
@@ -448,7 +448,7 @@ do_ascend (CHAR_DATA * ch, char * argy)
       next_obj = obj->next_content;
       if (IS_SET (obj->pIndexData->extra_flags, ITEM_SAVE))
 	continue;
-      if (pow.vaporize_inv && (obj->wear_loc == -1 || obj->contains != NULL))
+      if (poww.vaporize_inv && (obj->wear_loc == -1 || obj->contains != NULL))
 	{
 	  sprintf (workstr, "%s just vaporized!!\n\r", capitalize (obj->pIndexData->short_descr));
 	  send_to_char (workstr, ch);
@@ -457,7 +457,7 @@ do_ascend (CHAR_DATA * ch, char * argy)
 	}
       else if (obj->wear_loc != -1)
 	unequip_char (ch, obj);
-      if (pow.vaporize_all)
+      if (poww.vaporize_all)
 	{
 	  sprintf (workstr, "%s just vaporized!!\n\r", capitalize (obj->pIndexData->short_descr));
 	  send_to_char (workstr, ch);
@@ -630,15 +630,15 @@ removed */
       ch->pcdata->learned[k] = -100;
     }
   natural_mana (ch);
-  if (pow.beams_to_room > 0)
+  if (poww.beams_to_room > 0)
     {
       int to_room;
-      if (pow.beams_to_room == 1)
+      if (poww.beams_to_room == 1)
 	{
 	  to_room = (ALIGN(ch) + 100);
 	}
       else
-	to_room = pow.beams_to_room;
+	to_room = poww.beams_to_room;
       char_from_room (ch);
       char_to_room (ch, get_room_index (to_room));
       do_look (ch, "auto");
@@ -666,7 +666,7 @@ do_forsake (CHAR_DATA * ch, char * argy)
   if(!str_cmp (argy, "cost"))
   {
 	send_to_char ("Forsake Requirements:\n\r", ch);
-	sprintf (buf4, "Lvl: %2d Remorts: %2d Wpts: %4d\n\r", pow.forsake_req[0], pow.forsake_req[1], pow.forsake_req[2]);
+	sprintf (buf4, "Lvl: %2d Remorts: %2d Wpts: %4d\n\r", poww.forsake_req[0], poww.forsake_req[1], poww.forsake_req[2]);
 	send_to_char (buf4, ch);
 	return;
   }
@@ -681,27 +681,27 @@ do_forsake (CHAR_DATA * ch, char * argy)
     return;
   }
   
-  if (ch->pcdata->remort_times < pow.forsake_req[1])
+  if (ch->pcdata->remort_times < poww.forsake_req[1])
   {
-	  sprintf (buf4, "You must have remorted at least %d times in order to forsake.\n\r", pow.forsake_req[1]);
+	  sprintf (buf4, "You must have remorted at least %d times in order to forsake.\n\r", poww.forsake_req[1]);
 	  send_to_char(buf4, ch);
 	  return;
   }
 
-  if (LEVEL(ch) < pow.forsake_req[0])
+  if (LEVEL(ch) < poww.forsake_req[0])
   {
-    sprintf (buf4, "You must be at least level %d in order to forsake.\n\r", pow.forsake_req[0]);
+    sprintf (buf4, "You must be at least level %d in order to forsake.\n\r", poww.forsake_req[0]);
     send_to_char (buf4, ch);
     return;
   }
 
-  if (ch->pcdata->warpoints < pow.forsake_req[2])
+  if (ch->pcdata->warpoints < poww.forsake_req[2])
   {
-    sprintf (buf4, "You must have at least %d current warpoints to forsake your alignment.\n\r", pow.forsake_req[2]);
+    sprintf (buf4, "You must have at least %d current warpoints to forsake your alignment.\n\r", poww.forsake_req[2]);
     send_to_char (buf4, ch);
     return;
   }
-  if (pow.forsake_req[4] > 0 && get_room_index(pow.forsake_req[4]) != NULL && ch->in_room->vnum != pow.forsake_req[4] )
+  if (poww.forsake_req[4] > 0 && get_room_index(poww.forsake_req[4]) != NULL && ch->in_room->vnum != poww.forsake_req[4] )
     {
       send_to_char("You are not in the proper place to forsake!\n\r", ch);
       return;
@@ -757,9 +757,9 @@ do_remort (CHAR_DATA * ch, char * argy)
 !str_cmp(argy, "costs"))
     {
       if ((ch->pcdata->race > 10 &&
-	   pow.asctransform_in_room > 0) ||
+	   poww.asctransform_in_room > 0) ||
 	  (ch->pcdata->race < 11 &&
-	   pow.transform_in_room > 0))
+	   poww.transform_in_room > 0))
       {
         show_remort_requirements (ch, argy);
         return;
@@ -780,31 +780,31 @@ do_remort (CHAR_DATA * ch, char * argy)
       info_remort(ch, "");
       return;
     }
-   if (ch->pcdata->race < 11 && pow.remort_in_room[ch->pcdata->remort_times] > 0 &&
-       get_room_index(pow.remort_in_room[ch->pcdata->remort_times]) != NULL && 
-       ch->in_room->vnum != pow.remort_in_room[ch->pcdata->remort_times] )
+   if (ch->pcdata->race < 11 && poww.remort_in_room[ch->pcdata->remort_times] > 0 &&
+       get_room_index(poww.remort_in_room[ch->pcdata->remort_times]) != NULL && 
+       ch->in_room->vnum != poww.remort_in_room[ch->pcdata->remort_times] )
     {
       send_to_char("You are not in the proper place to remort!\n\r", ch);
       return;
     }
-  if (ch->pcdata->race > 10 && pow.ascend_remort_in_room[ch->pcdata->remort_times] > 0 && get_room_index(pow.ascend_remort_in_room[ch->pcdata->remort_times]) != NULL && ch->in_room->vnum != pow.ascend_remort_in_room[ch->pcdata->remort_times] )
+  if (ch->pcdata->race > 10 && poww.ascend_remort_in_room[ch->pcdata->remort_times] > 0 && get_room_index(poww.ascend_remort_in_room[ch->pcdata->remort_times]) != NULL && ch->in_room->vnum != poww.ascend_remort_in_room[ch->pcdata->remort_times] )
     {
       send_to_char("You are not in the proper place to remort!\n\r", ch);
       return;
     }
   remort = ch->pcdata->remort_times;
-  if ((ch->pcdata->race < 11 && (LEVEL(ch) < pow.remort_req[remort][0])) 
-	|| (ch->pcdata->race > 10 && (LEVEL(ch) < pow.ascended_remort_req[remort][0]))) 
+  if ((ch->pcdata->race < 11 && (LEVEL(ch) < poww.remort_req[remort][0])) 
+	|| (ch->pcdata->race > 10 && (LEVEL(ch) < poww.ascended_remort_req[remort][0]))) 
     {
       send_to_char("You need to gain more levels before you can remort!\n\r", ch);
       ready = FALSE;
     }
-  if ((ch->pcdata->race < 11 && (ch->pcdata->warpoints < pow.remort_req[remort][1])) || (ch->pcdata->race > 10 && (ch->pcdata->warpoints < pow.ascended_remort_req[remort][1])))
+  if ((ch->pcdata->race < 11 && (ch->pcdata->warpoints < poww.remort_req[remort][1])) || (ch->pcdata->race > 10 && (ch->pcdata->warpoints < poww.ascended_remort_req[remort][1])))
     {
       send_to_char("You need to pkill more before we will allow you to remort!\n\r", ch);
       ready = FALSE;
     }
-  if ((ch->pcdata->race < 11 && (ch->pcdata->killpoints < pow.remort_req[remort][3])) || (ch->pcdata->race > 10 && (ch->pcdata->killpoints < pow.ascended_remort_req[remort][3]))) 
+  if ((ch->pcdata->race < 11 && (ch->pcdata->killpoints < poww.remort_req[remort][3])) || (ch->pcdata->race > 10 && (ch->pcdata->killpoints < poww.ascended_remort_req[remort][3]))) 
     {
       send_to_char("You need to kill more tough monsters before you can remort!\n\r", ch);
       ready = FALSE;
@@ -812,13 +812,13 @@ do_remort (CHAR_DATA * ch, char * argy)
   if (!ready)
     return;
   char_from_room(ch);
-  if ((pow.transform_in_room > 0 && 
-	get_room_index(pow.transform_in_room) != NULL && 
+  if ((poww.transform_in_room > 0 && 
+	get_room_index(poww.transform_in_room) != NULL && 
 	ch->pcdata->race < 11) ||
-	(pow.asctransform_in_room > 0 &&
-	get_room_index(pow.asctransform_in_room) != NULL &&
+	(poww.asctransform_in_room > 0 &&
+	get_room_index(poww.asctransform_in_room) != NULL &&
 	ch->pcdata->race > 10))
-    char_to_room(ch, get_room_index(pow.transform_in_room));
+    char_to_room(ch, get_room_index(poww.transform_in_room));
   {
     CHAR_DATA *sch;
     sch=create_mobile(get_mob_index(1));
@@ -829,13 +829,13 @@ do_remort (CHAR_DATA * ch, char * argy)
   }
   if (ch->pcdata->race < 11)
    {
-  	ch->pcdata->warpoints -= pow.remort_req[remort][2];
-  	ch->pcdata->killpoints -= pow.remort_req[remort][4];
+  	ch->pcdata->warpoints -= poww.remort_req[remort][2];
+  	ch->pcdata->killpoints -= poww.remort_req[remort][4];
    }
   else
    {
-	ch->pcdata->warpoints -= pow.ascended_remort_req[remort][2];
-	ch->pcdata->killpoints -= pow.ascended_remort_req[remort][4];
+	ch->pcdata->warpoints -= poww.ascended_remort_req[remort][2];
+	ch->pcdata->killpoints -= poww.ascended_remort_req[remort][4];
    }
 }
 
@@ -849,7 +849,7 @@ DEFINE_COMMAND ("choosesides", do_choosesides, POSITION_DEAD, 0, LOG_NORMAL, "Th
 
   if (IS_MOB(ch)) return;
 
-if (pow.choose_in_room > 0 && (!ch->in_room || ch->in_room->vnum != pow.choose_in_room))
+if (poww.choose_in_room > 0 && (!ch->in_room || ch->in_room->vnum != poww.choose_in_room))
   {
     send_to_char("You are not in the room of choosing.\n\r", ch);
     return;
@@ -905,7 +905,7 @@ write_playerbase_to_file (void)
       if (playerbase->player_level != -1)
 	{
 	  tps++;
-	  if(playerbase->player_level <= pow.level_to_choose && playerbase->player_remort_times == 0)
+	  if(playerbase->player_level <= poww.level_to_choose && playerbase->player_remort_times == 0)
 	    np++;
 	  if (playerbase->player_remort_times > 0)
 	    rp++;
@@ -938,7 +938,7 @@ do_players (CHAR_DATA * ch, char *argy)
   int average_lev[NUM_ALIGN];
   int level_tot[NUM_ALIGN];
   int num_tot[NUM_ALIGN];
-  int num_remorts[NUM_ALIGN][pow.max_remorts+1];
+  int num_remorts[NUM_ALIGN][poww.max_remorts+1];
   int maximum_remorts[NUM_ALIGN];
   int i, jj; 
  
@@ -954,7 +954,7 @@ do_players (CHAR_DATA * ch, char *argy)
       level_tot[jj] = 0;
       num_tot[jj] = 0;
       maximum_remorts[jj] = 0;
-      for (i = 0; i < (pow.max_remorts+1); i++)
+      for (i = 0; i < (poww.max_remorts+1); i++)
 	{
 	  num_remorts[jj][i] = 0;
 	}
@@ -998,7 +998,7 @@ do_players (CHAR_DATA * ch, char *argy)
     }
   if (!str_cmp(argy, "full") && LEVEL(ch) == MAX_LEVEL)
     {
-      for (i=0; i < (pow.max_remorts+1); i++)
+      for (i=0; i < (poww.max_remorts+1); i++)
 	{
 	  update_char[0] = '\0';
 	  for (jj = 0; jj < NUM_ALIGN; jj++)
@@ -1140,7 +1140,7 @@ show_remort (CHAR_DATA * ch)
   send_to_char ("Transform <\x1B[1;37mstat\x1B[0m> <\x1B[1;37mstat\x1B[0m> <\x1B[1;37mstat\x1B[0m>\n\r", ch);
   send_to_char ("<stat> is STR, DEX, CON, WIS, INT or NONE to specify null.\n\r", ch);
   send_to_char ("\n\rOr:\n\r", ch);
-  if (pow.augmentremortonly)
+  if (poww.augmentremortonly)
   {
   send_to_char ("Transform <\x1B[1;37mstat\x1B[0m> <\x1B[1;37mstat\x1B[0m> <\x1B[1;37maugment\x1B[0m>\n\r", ch);
   send_to_char ("To view a list of augments type augment list.\n\r", ch);

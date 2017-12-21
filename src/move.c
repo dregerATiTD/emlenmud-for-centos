@@ -298,7 +298,7 @@ do_capture (CHAR_DATA *ch, char *argy)
 		char buf[512];
 		int n_god;
 		n_god = number_range (0, 4);
-		god = pow.god_names[n_god];
+		god = poww.god_names[n_god];
 		sprintf (buf, "\x1b[1;37m%s whispers, \"Moron!  You can't capture outside of a throne room!\"\n\r\x1b[0;37m", god);
 		send_to_char(buf, ch);
 		return;
@@ -879,7 +879,7 @@ move_char (CHAR_DATA * ch, int door)
       }
     
     if (RIDING (ch) == NULL)
-      if(pow.easier_moves)
+      if(poww.easier_moves)
 	SUBMOVE(ch,(move/2));
       else
 	SUBMOVE(ch,move);
@@ -2583,7 +2583,7 @@ do_stand (CHAR_DATA * ch, char *argy)
       ch->fgt->combat_delay_count = -5;
       break;
     case POSITION_GROUNDFIGHTING:
-      if ((number_range (1, (pow.groundfight_stand + ((ch->ced->ground_pos
+      if ((number_range (1, (poww.groundfight_stand + ((ch->ced->ground_pos
 == FP_CHOKE_1 || ch->ced->ground_pos == FP_CHOKE_2 || ch->ced->ground_pos == FP_CHOKE_3) ? 1: 0))) != 1) && 
 	  (ch->fgt) &&
 	  (ch->fgt->fighting) &&
@@ -2722,7 +2722,7 @@ do_sleep (CHAR_DATA * ch, char *argy)
       send_to_char ("But you're in the middle of combat.. it wouldn't be to your benefit!\n\r", ch);
       return;
     }
-  if (pow.weather && IS_PLAYER (ch) && ch->in_room &&
+  if (poww.weather && IS_PLAYER (ch) && ch->in_room &&
       (ch->in_room->sector_type !=SECT_INSIDE) && (IS_OUTSIDE(ch) ||
 ch->in_room->sector_type < SECT_CAVE))
     {

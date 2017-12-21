@@ -462,7 +462,7 @@ do_bet (CHAR_DATA * ch, char *argy)
   int kkkk;
   DEFINE_COMMAND ("bet", do_bet, POSITION_DEAD, 0, LOG_NORMAL, "This command allows you to bet on arena fights.")
 
-    if (!pow.arena_on)
+    if (!poww.arena_on)
     {
       send_to_char ("Huh?\n\r", ch);
       return;
@@ -623,7 +623,7 @@ do_acceptc (CHAR_DATA * ch, char *argy)
   char buf[500];
   DEFINE_COMMAND ("accept", do_acceptc, POSITION_DEAD, 0, LOG_NORMAL, "This allows you to accept an arena challenge.")
 
-    if (!pow.arena_on)
+    if (!poww.arena_on)
     {
       send_to_char ("Huh?\n\r", ch);
       return;
@@ -767,7 +767,7 @@ do_challenge (CHAR_DATA * ch, char *argy)
   char arg1[500];
   DEFINE_COMMAND ("challenge", do_challenge, POSITION_DEAD, 0, LOG_NORMAL, "This command allows you to challenge another player to an arena battle.")
 
-    if (!pow.arena_on)
+    if (!poww.arena_on)
     {
       send_to_char ("Huh?\n\r", ch);
       return;
@@ -834,7 +834,7 @@ do_challenge (CHAR_DATA * ch, char *argy)
       return;
     }
   if(ALIGN(ch) != 0 && ALIGN(victim) != 0) {
-    if (!pow.arena_good_evil && (DIFF_ALIGN(ch, victim))) {
+    if (!poww.arena_good_evil && (DIFF_ALIGN(ch, victim))) {
       send_to_char ("That person is not currently playing or visible to you.\n\r", ch);
       return;
     }

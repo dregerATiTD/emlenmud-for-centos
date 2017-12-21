@@ -139,9 +139,9 @@ how_good (CHAR_DATA *ch, int gsn)
 	learned = ch->pcdata->learned[gsn];
       for (i = 0; i < 20; i++)
 	{
-	  if (pow.learned[i] != NULL && learned >= pow.low_range[i] && learned <= pow.high_range[i])
+	  if (poww.learned[i] != NULL && learned >= poww.low_range[i] && learned <= poww.high_range[i])
 	    {
-	      strcpy (bf, pow.learned[i]);
+	      strcpy (bf, poww.learned[i]);
 	      return (bf);
 	    }
 	}
@@ -272,14 +272,14 @@ do_learn (CHAR_DATA * ch, char *argy)
   if (IS_PLAYER (ch))
     {
       SPELL_DATA *spl;
-      if (spell->prereq_1 != NULL && (spl = skill_lookup(spell->prereq_1, -1)) != NULL && ch->pcdata->learned[spl->gsn] < pow.prereq)
+      if (spell->prereq_1 != NULL && (spl = skill_lookup(spell->prereq_1, -1)) != NULL && ch->pcdata->learned[spl->gsn] < poww.prereq)
 	    {
 	      sprintf (buf,
 		       "You need to be skilled in %s first.\n\r", spl->spell_funky_name);
 	      send_to_char (buf, ch);
 	      return;
 	    }
-      if (spell->prereq_2 != NULL && (spl = skill_lookup(spell->prereq_2, -1)) != NULL && ch->pcdata->learned[spl->gsn] < pow.prereq)
+      if (spell->prereq_2 != NULL && (spl = skill_lookup(spell->prereq_2, -1)) != NULL && ch->pcdata->learned[spl->gsn] < poww.prereq)
 	    {
 	      sprintf (buf,
 		       "You need to be skilled in %s first.\n\r", spl->spell_funky_name);
@@ -592,9 +592,9 @@ lerned_it:
     }
 
   if (spell->slot != 0)
-    adept = pow.max_prac_spells;
+    adept = poww.max_prac_spells;
   else
-    adept = pow.max_prac_skills;
+    adept = poww.max_prac_skills;
   if (spell->slot == 0)
     {
       if(get_curr_dex (ch) < spell->min_wis)
@@ -638,13 +638,13 @@ lerned_it:
   if (IS_PLAYER (ch))
     {
       SPELL_DATA *spl;
-      if (spell->prereq_1 != NULL && (spl = skill_lookup(spell->prereq_1, -1)) != NULL && ch->pcdata->learned[spl->gsn] < pow.prereq)
+      if (spell->prereq_1 != NULL && (spl = skill_lookup(spell->prereq_1, -1)) != NULL && ch->pcdata->learned[spl->gsn] < poww.prereq)
 	{
 	  sprintf (buf, "You need to be skilled in %s first.\n\r", spl->spell_funky_name);
 	  send_to_char (buf, ch);
 	  return;
 	}
-      if (spell->prereq_2 != NULL && (spl = skill_lookup(spell->prereq_2, -1)) != NULL && ch->pcdata->learned[spl->gsn] < pow.prereq)
+      if (spell->prereq_2 != NULL && (spl = skill_lookup(spell->prereq_2, -1)) != NULL && ch->pcdata->learned[spl->gsn] < poww.prereq)
 	{
 	  sprintf (buf, "You need to be skilled in %s first.\n\r", spl->spell_funky_name);
 	  send_to_char (buf, ch);
@@ -687,7 +687,7 @@ lerned_it:
 	  ch->pcdata->learned[spell->gsn] = adept;
 	  act ("You now have a good understanding of $T.",
 	       ch, NULL, spell->spell_funky_name, TO_CHAR);
-	  if (spell->gsn > 549 && IS_PLAYER(ch) && !str_cmp(race_info[ch->pcdata->race].name, "orc") && adept == pow.max_prac_skills)
+	  if (spell->gsn > 549 && IS_PLAYER(ch) && !str_cmp(race_info[ch->pcdata->race].name, "orc") && adept == poww.max_prac_skills)
 	    ch->pcdata->learned[spell->gsn]+= 15;
 	}
     
